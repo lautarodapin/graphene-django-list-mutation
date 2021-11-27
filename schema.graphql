@@ -1,0 +1,65 @@
+schema {
+  query: Query
+  mutation: Mutation
+}
+
+type CreateUsers2Mutation {
+  users: [UserType]
+  errors: [ErrorType]
+}
+
+input CreateUsersMutationInput {
+  users: [UserFormInput!]!
+  clientMutationId: String
+}
+
+type CreateUsersMutationPayload {
+  users: [UserFormOutput!]!
+  errors: [ErrorType]
+  clientMutationId: String
+}
+
+scalar DateTime
+
+type ErrorType {
+  field: String!
+  messages: [String!]!
+}
+
+type Mutation {
+  createUsers(input: CreateUsersMutationInput!): CreateUsersMutationPayload
+  createUsers2(input: [UserFormInput2!]): CreateUsers2Mutation
+}
+
+type Query {
+  users: [UserType!]
+}
+
+input UserFormInput {
+  username: String!
+  password: String!
+}
+
+input UserFormInput2 {
+  username: String!
+  password: String!
+}
+
+type UserFormOutput {
+  username: String!
+  password: String!
+}
+
+type UserType {
+  id: ID!
+  password: String!
+  lastLogin: DateTime
+  isSuperuser: Boolean!
+  username: String!
+  firstName: String!
+  lastName: String!
+  email: String!
+  isStaff: Boolean!
+  isActive: Boolean!
+  dateJoined: DateTime!
+}
